@@ -1,0 +1,49 @@
+# 忽略Maven构建生成的目录和文件
+/target/
+*.iml
+
+# 忽略IDEA生成的目录和文件
+/.idea/
+/.idea_modules/
+.idea/
+
+# 忽略操作系统和IDE生成的文件
+.DS_Store
+Thumbs.db
+
+# 忽略日志文件
+*.log
+
+# 忽略Spring Boot应用程序的配置文件
+/application.properties
+/application.yml
+/application-dev.properties
+/application-dev.yml
+/application-prod.properties
+/application-prod.yml
+
+# 忽略编译生成的文件
+/bin/
+
+# 忽略本地构建的缓存
+/.gradle/
+/.m2/
+
+# 忽略Spring Boot生成的日志文件夹
+/logs/
+
+# 忽略Vue.js生成的构建目录
+/dist/
+/node_modules/
+
+# 忽略VSCode配置文件，每个开发者的VSCode配置可能不同
+.vscode/
+
+# 忽略生成的构建目录
+/dist/
+
+# 忽略VSCode工作区设置文件
+.code-workspace
+
+# 忽略yarn的错误日志文件
+yarn-error.log
