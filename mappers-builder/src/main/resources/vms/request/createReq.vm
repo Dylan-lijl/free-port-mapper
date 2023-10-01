@@ -1,0 +1,44 @@
+package ${cfg.parent}.dto.request;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pub.carzy.free_port_mapper.common.basic.CreateRequest;
+import pub.carzy.validation.annotations.Trim;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+/**
+* 新增请求
+* @author ${author}
+* @since ${date}
+*/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class Create${entity}Request extends CreateRequest {
+#foreach($field in $table.fields)
+    #set($need = false)
+    #if(!$field.keyFlag)
+    #if($field.customMap.Null == 'NO')
+        #set($need = true)
+    #end
+    @ApiModelProperty(value = "$field.comment"#if($need) ,required = true #end)
+    #if($need)
+    #if($field.propertyType == 'String')
+    @NotBlank(message = "缺少${field.comment}")
+    #else
+    @NotNull(message = "缺少${field.comment}")
+    #end
+    #end
+    #if($field.propertyType == 'String')
+    @Trim
+        #set($size = $field.type.replaceAll("[^0-9]",""))
+    #if($size)
+    @Size(max = $size ,message = "字符串超出指定长度")
+    #end
+    #end
+    private ${field.propertyType} ${field.propertyName};
+
+#end
+#end
+}

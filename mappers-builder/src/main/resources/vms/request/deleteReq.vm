@@ -1,0 +1,20 @@
+package ${cfg.parent}.dto.request;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pub.carzy.free_port_mapper.common.basic.DeleteByIdsRequest;
+#set($type="Integer")
+#foreach($field in $tableInfo.fields)
+    #if($field.keyFlag)
+        #set($type = $field.propertyType)
+    #end
+#end
+/**
+* 删除请求
+* @author ${author}
+* @since ${date}
+*/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class Delete${entity}Request extends DeleteByIdsRequest<$type> {
+}

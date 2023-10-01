@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  application:
+    name: server
+  servlet:
+    multipart:
+      # 设置 上传文件的大小
+      max-file-size: -1
+      # 设置 整个请求的大小
+      max-request-size: -1
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    auto-mapping-behavior: partial
+    map-underscore-to-camel-case: true
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info
+    pub.carzy: debug
+web:
+  export:
+    #切点
+    aop-expression: "execution(* (@org.springframework.web.bind.annotation.RestController * || @org.springframework.stereotype.Controller *) .*(..))"
+    #文件前缀
+    prefix: $download_
+server:
+  port: 9873

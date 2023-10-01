@@ -1,0 +1,37 @@
+package ${cfg.parent}.dto.request;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import java.util.Date;
+import lombok.EqualsAndHashCode;
+import pub.carzy.free_port_mapper.common.basic.UpdateByIdRequest;
+import pub.carzy.validation.annotations.Trim;
+#set($type="Integer")
+#foreach($field in $tableInfo.fields)
+    #if($field.keyFlag)
+        #set($type = $field.propertyType)
+    #end
+#end
+/**
+* 修改请求
+* @author ${author}
+* @since ${date}
+*/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class Update${entity}Request extends UpdateByIdRequest<$type> {
+#foreach($field in $table.fields)
+    #if(!$field.keyFlag)
+    @ApiModelProperty(value = "$field.comment")
+    #if($field.propertyType == 'String')
+    @Trim
+        #set($size = $field.type.replaceAll("[^0-9]",""))
+        #if($size)
+    @Size(max = $size ,message = "字符串超出指定长度")
+        #end
+    #end
+    private ${field.propertyType} ${field.propertyName};
+
+    #end
+#end
+}

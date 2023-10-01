@@ -1,0 +1,24 @@
+package ${cfg.parent}.dto.request;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pub.carzy.free_port_mapper.common.basic.UpdateByIdRequest;
+
+import javax.validation.constraints.NotNull;
+#set($type="Integer")
+#foreach($field in $tableInfo.fields)
+    #if($field.keyFlag)
+        #set($type = $field.propertyType)
+    #end
+#end
+/**
+* @author admin
+*/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class Update${entity}StateRequest extends UpdateByIdRequest<$type> {
+    @ApiModelProperty(value = "状态",required = true)
+    @NotNull(message = "缺少状态")
+    private Integer state;
+}

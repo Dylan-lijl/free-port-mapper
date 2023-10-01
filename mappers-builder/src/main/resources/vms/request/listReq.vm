@@ -1,0 +1,15 @@
+package ${cfg.parent}.dto.request;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pub.carzy.free_port_mapper.common.basic.PageRequest;
+
+/**
+* 查询列表请求
+* @author ${author}
+* @since ${date}
+*/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class List${entity}Request extends PageRequest {
+}

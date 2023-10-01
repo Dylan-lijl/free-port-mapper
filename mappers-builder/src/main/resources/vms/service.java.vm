@@ -1,0 +1,76 @@
+#set($clientInfo = ${entity})
+#set($clientInfoCamel = ${entity.substring(0, 1).toLowerCase()}+${entity.substring(1)})
+#set($serviceVar = ${table.serviceName.substring(0, 1).toLowerCase()}+${table.serviceName.substring(1)})
+#set($clientInfoDesc = $!{table.comment}+"")
+#set($hasStateColumn = false)
+#foreach($field in $table.fields)
+    #if($field.propertyName == 'state')
+        #set($hasStateColumn = true)
+        #break
+    #end
+#end
+package ${package.Service};
+import com.baomidou.mybatisplus.extension.service.IService;
+import pub.carzy.free_port_mapper.common.basic.CreateResponse;
+import pub.carzy.free_port_mapper.common.basic.UpdateResponse;
+import ${cfg.parent}.dto.request.List${clientInfo}Request;
+import ${cfg.parent}.dto.request.Info${clientInfo}Request;
+import ${cfg.parent}.dto.request.Create${clientInfo}Request;
+import ${cfg.parent}.dto.request.Update${clientInfo}Request;
+import ${cfg.parent}.dto.request.Delete${clientInfo}Request;
+#if(${table.hasStateColumn})
+import ${cfg.parent}.dto.request.Update${clientInfo}StateRequest;
+#end
+import ${cfg.parent}.dto.response.Info${clientInfo}Response;
+import ${cfg.parent}.dto.response.List${clientInfo}Response;
+import pub.carzy.free_port_mapper.common.api.CommonPage;
+import ${package.Entity}.${table.entityName};
+
+/**
+ * ${clientInfoDesc}
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${clientInfo}Service extends IService<${clientInfo}> {
+    /**
+     * 分页查询
+     * @param request 请求
+     * @return 查询结果
+     */
+    CommonPage<List${clientInfo}Response> pageList(List${clientInfo}Request request);
+
+    /**
+     * ${clientInfoDesc}
+     * @param request 请求
+     * @return 信息
+     */
+    Info${clientInfo}Response infoData(Info${clientInfo}Request request);
+
+    /**
+     * 创建${clientInfoDesc}
+     * @param request 请求
+     * @return id
+     */
+    CreateResponse<Integer> createData(Create${clientInfo}Request request);
+
+    /**
+     * 修改${clientInfoDesc}
+     * @param request 请求
+     * @return 更新是否成功
+     */
+    UpdateResponse updateData(Update${clientInfo}Request request);
+
+    /**
+     * 删除${clientInfoDesc}
+     * @param request 请求
+     */
+    void deleteData(Delete${clientInfo}Request request);
+
+    #if(${hasStateColumn})
+    /**
+     * 更新状态
+     * @param request 请求
+     */
+    void updateStateData(Update${clientInfo}StateRequest request);
+    #end
+}

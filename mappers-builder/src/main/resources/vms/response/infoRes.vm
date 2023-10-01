@@ -1,0 +1,30 @@
+package ${cfg.parent}.dto.response;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pub.carzy.free_port_mapper.common.basic.BasicResponse;
+
+import java.util.Date;
+#set($type="Integer")
+#foreach($field in $tableInfo.fields)
+    #if($field.keyFlag)
+        #set($type = $field.propertyType)
+    #end
+#end
+/**
+* 详情响应
+* @author ${author}
+* @since ${date}
+*/
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class Info${entity}Response extends BasicResponse<$type> {
+#foreach($field in $table.fields)
+    #if(!$field.keyFlag)
+    @ApiModelProperty(value = "$field.comment")
+    private ${field.propertyType} ${field.propertyName};
+
+    #end
+#end
+}

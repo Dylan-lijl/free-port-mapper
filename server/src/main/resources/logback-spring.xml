@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--颜色 black 黑色 white 白色 red 红色 green 绿色 yellow 黄色 magenta 紫色 cyan 藏青 blue 蓝色 前面加上bold加粗 例如:加粗红:boldRed highlight 高亮-->
+    <property name="DEV_PATTERN"
+              value="%highlight(%-12(%d{yyyy-MM-dd HH:mm:ss.SSS})) |- %red(%-5level) %yellow([%thread])  %magenta(%c)  %green([%L]) -| %cyan(%msg%n) "/>
+    <property name="TEST_PATTERN"
+              value="%highlight(%-12(%d{yyyy-MM-dd HH:mm:ss.SSS})) |- %red(%-5level) %yellow([%thread])  %magenta(%c)  %green([%L]) -| %cyan(%msg%n) "/>
+    <!-- 文件输出格式 -->
+    <property name="PRD_PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n"/>
+    <!-- pro文件路径 -->
+    <property name="PRO_FILE_PATH" value="logs"/>
+
+    <!-- 开发环境 -->
+    <springProfile name="dev">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${DEV_PATTERN}</pattern>
+            </encoder>
+        </appender>
+        <logger name="com.light.springboot" level="info"/>
+        <logger name="com.china_mobile" level="debug"  additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+        <!-- 每天产生一个文件 -->
+        <appender name="FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>${PRD_PATTERN}</pattern>
+            </encoder>
+            <file>${PRO_FILE_PATH}/log.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>7</maxHistory>
+            </rollingPolicy>
+        </appender>
+        <logger name="com.light.springboot" level="info"/>
+        <root level="info">
+            <appender-ref ref="FILE_LOG"/>
+        </root>
+        <logger name="pub.carzy" level="info" additivity="false">
+            <appender-ref ref="FILE_LOG"/>
+        </logger>
+    </springProfile>
+</configuration>
