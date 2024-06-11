@@ -14,3 +14,5 @@ web:
   export:
     #保存文件的文件夹绝对路径
     common-file-path: ${file-config.root}\\${file-config.tmp}
+my-setting:
+  password: root

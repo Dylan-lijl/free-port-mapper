@@ -212,6 +212,13 @@ public class MyBatisPlusGenerator {
                 return dtoPackage + "/request/" + "Update" + tableInfo.getEntityName() + "StateRequest" + ".java";
             }
         });
+        //delete请求
+        focList.add(new FileOutConfig("/vms/request/deleteReq.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return dtoPackage + "/request/" + "Delete" + tableInfo.getEntityName() + "Request" + ".java";
+            }
+        });
         //--------------  response --------
         //listRes
         focList.add(new FileOutConfig("/vms/response/listRes.vm") {

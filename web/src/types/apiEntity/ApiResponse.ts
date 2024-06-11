@@ -1,4 +1,5 @@
 export interface CommonResult<T> {
+  skip?: boolean,
   code?: number,
   message?: string,
   data?: T,

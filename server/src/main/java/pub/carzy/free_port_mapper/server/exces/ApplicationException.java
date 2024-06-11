@@ -1,6 +1,6 @@
 package pub.carzy.free_port_mapper.server.exces;
 
-import pub.carzy.free_port_mapper.server.util.ResponseCode;
+import pub.carzy.free_port_mapper.common.util.ResponseCode;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;

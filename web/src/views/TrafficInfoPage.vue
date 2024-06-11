@@ -1,11 +1,9 @@
 <template>
-  <div class="custom-info-page">
-    未实现
-  </div>
+  <div class="custom-info-page">未实现</div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from "vue";
 export default defineComponent({
-  
+  name: "TrafficInfo",
 });
 </script>

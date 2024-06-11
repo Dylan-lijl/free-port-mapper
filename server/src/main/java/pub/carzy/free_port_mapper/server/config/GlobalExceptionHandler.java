@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pub.carzy.free_port_mapper.common.api.CommonResult;
 import pub.carzy.free_port_mapper.server.exces.ApplicationException;
-import pub.carzy.free_port_mapper.server.util.ResponseCode;
+import pub.carzy.free_port_mapper.common.util.ResponseCode;
 
 /**
  * @author admin

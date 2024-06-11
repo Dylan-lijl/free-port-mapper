@@ -15,9 +15,16 @@
         :key="pane.key"
         :closable="pane.closable"
       >
-      <template #tab>
-        <span>{{ pane.title }}</span>
-      </template>
+        <template #tab>
+          <span>
+            <component
+              :is="pane.icon"
+              v-if="!!pane.icon"
+              style="font-size: 14px; min-width: 14px"
+            ></component>
+            <span>{{ pane.title }}</span>
+          </span>
+        </template>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -35,7 +42,6 @@ export default defineComponent({
   setup() {
     //编辑回调(只监听删除逻辑)
     const onEdit = (event, action) => {
-      console.log(event, action);
       if (action != "remove") {
         return;
       }

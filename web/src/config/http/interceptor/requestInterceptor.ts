@@ -14,7 +14,7 @@ export function prepare(config) {
   const token = store.getters["user/token"];
   if (token) {
     //设置token
-    config.headers[tokenHeader] = tokenPrefix + " " + token;
+    config.headers[tokenHeader] = tokenPrefix + token;
   }
   //如果是json传输格式,需要添加一个默认属性(否则会变成流传输格式而不是json传输格式)
   if (config.data && !(config.data instanceof FormData)) {

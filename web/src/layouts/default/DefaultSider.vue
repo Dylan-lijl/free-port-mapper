@@ -66,7 +66,6 @@
 import { defineComponent, computed } from "vue";
 import type { MenuProps } from "ant-design-vue";
 import store from "@/store";
-import router from "@/router";
 import { toTab } from "@/util/menuTabConverter";
 
 export default defineComponent({
@@ -89,7 +88,7 @@ export default defineComponent({
           activate: true,
         });
         //跳转路由
-        router.push({ name: findMenu.key });
+        store.dispatch("system/submitActiveKey");
       }
     };
     //计算属性(菜单)

@@ -1,4 +1,6 @@
-import message from '@/components/ui/Message';
+// import message from '@/components/ui/Message';
+import modal from "@/components/ui/Modal";
+import router from "@/router";
 import { downloadUrl } from "@/util/DownloadFile";
 import { getServerFilePath } from '@/util/UrlUtil';
 /**
@@ -25,7 +27,6 @@ const state_401 = {
   sort: 1,
   answer(code) { return this.state === code },
   method: res => {
-    message.error({ content: "请先登录,在继续访问!", duration: 3 });
     return Promise.reject(res);
   }
 }
@@ -37,7 +38,14 @@ const state_403 = {
   sort: 2,
   answer(code) { return this.state === code },
   method: res => {
-    message.warning({ content: res.message, duration: 3 });
+    res.skip = true;
+    //重新回到登录界面
+    modal.confirm({
+      title: res.message,
+      onOk: () => {
+        router.push({ name: 'Login' })
+      }
+    })
     return Promise.reject(res);
   }
 }
@@ -49,7 +57,6 @@ const state_default = {
   sort: 3,
   answer: () => true,
   method: res => {
-    console.log("请求失败:" + res.message);
     return Promise.reject(res)
   }
 }

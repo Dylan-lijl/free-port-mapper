@@ -4,10 +4,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pub.carzy.free_port_mapper.common.basic.CreateRequest;
-import pub.carzy.free_port_mapper.server.util.ResponseMessage;
+import pub.carzy.free_port_mapper.common.util.ResponseMessage;
 import pub.carzy.validation.annotations.Trim;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 

@@ -7,8 +7,7 @@ import pub.carzy.export_file.exce.ExportFileEmptyException;
 import pub.carzy.export_file.exce.ExportNotSupportedException;
 import pub.carzy.export_file.exce.SystemErrorException;
 import pub.carzy.free_port_mapper.common.api.CommonResult;
-import pub.carzy.free_port_mapper.common.api.ResultCodeEnum;
-import pub.carzy.free_port_mapper.server.util.ResponseCode;
+import pub.carzy.free_port_mapper.common.util.ResponseCode;
 
 /**
  * @author admin

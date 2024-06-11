@@ -118,6 +118,12 @@
                       @click="() => deleteByIds([record.id])"
                       ><DeleteOutlined />删除</a-button
                     >
+                    <a-button
+                      type="link"
+                      size="small"
+                      @click="() => gotoPortMapping(record.id)"
+                      >映射列表</a-button
+                    >
                   </div>
                 </template>
               </template>
@@ -195,6 +201,7 @@ import {
   InfoCustomInfoResponse,
 } from "@/types/apiEntity/CustomInfo";
 import { CommonResult, CommonPage } from "@/types/apiEntity/ApiResponse";
+import router from "@/router";
 
 /**
  * 默认的请求参数
@@ -215,6 +222,7 @@ export default defineComponent({
     DeleteOutlined,
     EditOutlined,
   },
+  name: "CustomInfo",
   setup() {
     //多选配置
     const rowSelection = ref({
@@ -571,6 +579,9 @@ export default defineComponent({
       pagination.value = { ...p };
       reloadData();
     };
+    const gotoPortMapping = (userId) => {
+      router.push({ name: "PortMapping", query: { userId } });
+    };
     //挂载成功回调
     onMounted(() => {
       //加载列表数据
@@ -603,6 +614,7 @@ export default defineComponent({
       changeMultiple,
       rowSelection,
       tabelChange,
+      gotoPortMapping,
     };
   },
 });

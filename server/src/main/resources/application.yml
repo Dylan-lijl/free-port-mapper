@@ -32,3 +32,29 @@ web:
     prefix: $download_
 server:
   port: 9873
+my-setting:
+  password: root
+  port: 9872
+jwt:
+  sign: 9608379760d011eea331bbc15146dbf5
+auth:
+  tokenHeader: Authorization
+  tokenPrefix: "Bearer "
+  ignoreUri:
+    - /swagger-ui.html
+    - /doc.html
+    - /swagger-resources/**
+    - /swagger/**
+    - /**/v2/api-docs
+    - /**/*.js
+    - /**/*.css
+    - /**/*.png
+    - /**/*.ico
+    - /webjars/springfox-swagger-ui/**
+    - /webjars/bycdao-ui/**
+    - /actuator/**
+    - /druid/**
+    - /user/login
+    - /file
+    - /error
+    - /user/clientInfo

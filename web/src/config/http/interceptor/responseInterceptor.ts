@@ -48,15 +48,27 @@ function registerMethod(res: CommonResult<unknown>, msg: string) {
   if (res) {
     //注册一些方法
     res.successMethod = () => {
+      if (res.skip) {
+        return
+      }
       message.success(msg);
     }
     res.errorMethod = () => {
+      if (res.skip) {
+        return
+      }
       message.error(msg);
     }
     res.warningMethod = () => {
+      if (res.skip) {
+        return
+      }
       message.warning(msg);
     }
     res.catch = () => {
+      if (res.skip) {
+        return
+      }
       if (res.errorMethod) {
         res.errorMethod();
       }

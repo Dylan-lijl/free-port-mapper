@@ -46,7 +46,7 @@ import pub.carzy.free_port_mapper.common.api.CommonPage;
 import ${package.Entity}.${table.entityName};
 import ${package.Mapper}.${table.mapperName};
 import pub.carzy.free_port_mapper.server.util.MybatisPageToCommonPage;
-import pub.carzy.free_port_mapper.server.util.ResponseCode;
+import pub.carzy.free_port_mapper.common.util.ResponseCode;
 import pub.carzy.free_port_mapper.server.exces.ApplicationException;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -7,7 +7,7 @@ import {
   ActionLogIcon,
 } from "@/components/icons";
 import { HomeOutlined } from "@ant-design/icons-vue";
-import { DefineComponent,shallowRef } from 'vue';
+import { DefineComponent, markRaw } from 'vue';
 
 interface Menu {
   key: string;
@@ -26,37 +26,38 @@ const index = {
   closable: false,
 };
 
+
 const state = {
   //菜单
   values: [
     {
       key: "CustomInfo",
       label: "客户信息",
-      icon: shallowRef(CustomInfoIcon),
+      icon: markRaw(CustomInfoIcon),
       closable: true
     },
     {
       key: "ErrorInfo",
       label: "错误信息",
-      icon: shallowRef(ErrorInfoIcon),
+      icon: markRaw(ErrorInfoIcon),
       closable: true
     },
     {
       key: "TrafficInfo",
       label: "流量信息",
-      icon: shallowRef(TrafficInfoIcon),
+      icon: markRaw(TrafficInfoIcon),
       closable: true
     },
     {
       key: "PortMapping",
       label: "端口映射",
-      icon: shallowRef(PostMappingIcon),
+      icon: markRaw(PostMappingIcon),
       closable: true
     },
     {
       key: "ActionLog",
       label: "操作日志",
-      icon: shallowRef(ActionLogIcon),
+      icon: markRaw(ActionLogIcon),
       closable: true
     },
   ],

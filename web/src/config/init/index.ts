@@ -7,4 +7,6 @@ export default function init() {
     //将主页添加到Tabs
     store.commit('system/addOpenTabs', { value: toTab(index), first: true, activate: true });
   }
+  //尝试恢复token
+  store.commit('user/restore');
 }

@@ -21,6 +21,7 @@
         <module>server</module>
         <module>mappers-builder</module>
         <module>validation</module>
+        <module>protocol</module>
     </modules>
 
     <profiles>
@@ -56,23 +57,43 @@
         <swagger-annotations.version>1.6.0</swagger-annotations.version>
         <swagger.bootstrap.version>1.9.4</swagger.bootstrap.version>
         <common.version>${project.version}</common.version>
+        <protocol.version>${project.version}</protocol.version>
         <validation.version>${project.version}</validation.version>
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <velocity.version>2.2</velocity.version>
         <export_file.version>1.0</export_file.version>
+        <java-jwt.version>3.4.0</java-jwt.version>
+        <netty.version>4.1.99.Final</netty.version>
+        <slf4j.version>1.7.32</slf4j.version>
+        <fastjson.version>1.2.75</fastjson.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version> <!-- 使用最新版本 -->
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version> <!-- 使用最新版本 -->
+            </dependency>
+            <dependency>
                 <groupId>carzy.pub</groupId>
                 <artifactId>common</artifactId>
                 <version>${common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>carzy.pub</groupId>
+                <artifactId>protocol</artifactId>
+                <version>${protocol.version}</version>
             </dependency>
             <dependency>
                 <groupId>carzy.pub</groupId>
@@ -141,6 +162,21 @@
                 <groupId>pub.carzy</groupId>
                 <artifactId>export_file</artifactId>
                 <version>${export_file.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

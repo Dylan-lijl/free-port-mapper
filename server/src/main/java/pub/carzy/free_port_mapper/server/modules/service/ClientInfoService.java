@@ -3,6 +3,7 @@ package pub.carzy.free_port_mapper.server.modules.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import pub.carzy.free_port_mapper.common.basic.CreateResponse;
 import pub.carzy.free_port_mapper.common.basic.UpdateResponse;
+import pub.carzy.free_port_mapper.server.modules.dto.inner.ClientDetailByProcessor;
 import pub.carzy.free_port_mapper.server.modules.dto.request.*;
 import pub.carzy.free_port_mapper.server.modules.dto.response.InfoClientInfoResponse;
 import pub.carzy.free_port_mapper.server.modules.dto.response.ListClientInfoResponse;
@@ -52,4 +53,18 @@ public interface ClientInfoService  extends IService<ClientInfo> {
      * @param request 请求
      */
     void deleteData(DeleteClientInfoRequest request);
+
+    /**
+     * 根据密钥获取用户信息
+     * @param secretKey 密钥
+     * @return 用户信息
+     */
+    ClientInfo findBySecretKey(String secretKey);
+
+    /**
+     * 根据secretKey查询用户详细信息
+     * @param secretKey 密钥
+     * @return 关联的数据
+     */
+    ClientDetailByProcessor findByProcessor(String secretKey);
 }

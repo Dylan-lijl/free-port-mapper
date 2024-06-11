@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pub.carzy.free_port_mapper.server.modules.mapper.PortMappingMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="pub.carzy.free_port_mapper.server.modules.model.PortMapping">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="protocol" property="protocol"/>
+        <result column="server_host" property="serverHost"/>
+        <result column="server_port" property="serverPort"/>
+        <result column="client_host" property="clientHost"/>
+        <result column="client_port" property="clientPort"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="client_proxy" property="clientProxy"/>
+    </resultMap>
+    <select id="findByKeyAndHostAndPort"
+            resultType="pub.carzy.free_port_mapper.server.modules.model.PortMapping">
+        SELECT user_id,
+               mapping.id,
+               client_host,
+               client_port,
+               client_proxy,
+               server_host,
+               server_port,
+               protocol
+        FROM port_mapping mapping
+                 JOIN client_info info ON mapping.id = info.id
+        WHERE info.secret_key = #{key}
+          AND mapping.server_host = #{host}
+          AND mapping.server_port = #{port}
+          AND info.state = 1
+          AND mapping.state = 1
+    </select>
+
+</mapper>

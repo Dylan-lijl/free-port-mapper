@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pub.carzy.free_port_mapper.common.basic.CreateResponse;
 import pub.carzy.free_port_mapper.common.basic.UpdateResponse;
 import pub.carzy.free_port_mapper.server.exces.ApplicationException;
+import pub.carzy.free_port_mapper.server.modules.dto.inner.ClientDetailByProcessor;
+import pub.carzy.free_port_mapper.server.modules.dto.inner.PortMappingByProcessor;
 import pub.carzy.free_port_mapper.server.modules.dto.request.*;
 import pub.carzy.free_port_mapper.server.modules.dto.response.InfoClientInfoResponse;
 import pub.carzy.free_port_mapper.server.modules.dto.response.ListClientInfoResponse;
@@ -20,11 +22,14 @@ import org.springframework.stereotype.Service;
 import pub.carzy.free_port_mapper.common.api.CommonPage;
 import pub.carzy.free_port_mapper.server.modules.mapper.ClientInfoMapper;
 import pub.carzy.free_port_mapper.server.modules.model.ClientInfo;
+import pub.carzy.free_port_mapper.server.modules.service.PortMappingService;
 import pub.carzy.free_port_mapper.server.util.MybatisPageToCommonPage;
-import pub.carzy.free_port_mapper.server.util.ResponseCode;
+import pub.carzy.free_port_mapper.common.util.ResponseCode;
 import pub.carzy.free_port_mapper.server.util.statics.ClientInfoState;
 
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,6 +37,9 @@ import java.util.Optional;
  */
 @Service
 public class ClientInfoServiceImpl extends ServiceImpl<ClientInfoMapper, ClientInfo> implements ClientInfoService {
+
+    @Resource
+    private PortMappingService portMappingService;
 
     @Override
     public CommonPage<ListClientInfoResponse> pageList(ListClientInfoRequest request) {
@@ -124,5 +132,29 @@ public class ClientInfoServiceImpl extends ServiceImpl<ClientInfoMapper, ClientI
         } else {
             removeByIds(request.getIds());
         }
+    }
+
+    @Override
+    public ClientInfo findBySecretKey(String secretKey) {
+        LambdaQueryWrapper<ClientInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(ClientInfo::getSecretKey,secretKey);
+        return getOne(wrapper);
+    }
+
+    @Override
+    public ClientDetailByProcessor findByProcessor(String secretKey) {
+        //查询用户信息
+        LambdaQueryWrapper<ClientInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.select(ClientInfo::getId,ClientInfo::getState);
+        wrapper.eq(ClientInfo::getSecretKey,secretKey);
+        ClientInfo one = getOne(wrapper);
+        if (one==null){
+            return null;
+        }
+        ClientDetailByProcessor detail = BeanUtil.copyProperties(one, ClientDetailByProcessor.class);
+        //根据id查找对应的端口映射列表
+        List<PortMappingByProcessor> mappings = portMappingService.findByProcessor(detail.getId(),true);
+        detail.setMappings(mappings);
+        return detail;
     }
 }

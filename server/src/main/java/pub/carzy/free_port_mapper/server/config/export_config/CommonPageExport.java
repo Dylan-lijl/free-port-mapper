@@ -11,7 +11,7 @@ import pub.carzy.free_port_mapper.common.api.CommonPage;
 import pub.carzy.free_port_mapper.common.api.CommonResult;
 import pub.carzy.free_port_mapper.common.basic.PageRequest;
 import pub.carzy.free_port_mapper.server.exces.ApplicationException;
-import pub.carzy.free_port_mapper.server.util.ResponseCode;
+import pub.carzy.free_port_mapper.common.util.ResponseCode;
 
 import java.util.ArrayList;
 import java.util.List;

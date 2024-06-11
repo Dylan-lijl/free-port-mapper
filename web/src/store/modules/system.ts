@@ -1,4 +1,4 @@
-import router from "@/router";
+import { gotoRouter, remove as removeRouter } from "@/router";
 // 系统变量
 
 const state = {
@@ -8,7 +8,6 @@ const state = {
   openTabs: [],
   //当前激活的标签
   tabActiveKey: '',
-  closedTabs: [],
 };
 
 interface CloseTab {
@@ -67,16 +66,14 @@ const mutations = {
         state.tabActiveKey = prevTabKey;
       }
       state.openTabs.splice(index, 1);
-      //添加到删除的数组中
-      if (!state.closedTabs.includes(removeTabItem.key)) {
-        state.closedTabs.push(removeTabItem.key);
-      }
+      //清除路由组件绑定的url
+      removeRouter(removeTabItem.key);
     }
   },
   //跳转key对应的路由
   gotoActiveKey(state, key) {
     if (key) {
-      router.push({ name: key });
+      gotoRouter({ name: key })
     }
   }
 

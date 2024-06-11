@@ -11,4 +11,5 @@ import java.io.Serializable;
 @Data
 public class BasicRequest implements Serializable {
     private ExportRequestParam _export;
+    private String token;
 }

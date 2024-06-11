@@ -10,8 +10,7 @@ import pub.carzy.free_port_mapper.common.basic.BasicRequest;
 import pub.carzy.free_port_mapper.common.basic.PageRequest;
 import pub.carzy.free_port_mapper.server.config.FileConfig;
 import pub.carzy.free_port_mapper.server.exces.ApplicationException;
-import pub.carzy.free_port_mapper.server.modules.service.FileService;
-import pub.carzy.free_port_mapper.server.util.ResponseCode;
+import pub.carzy.free_port_mapper.common.util.ResponseCode;
 
 import javax.annotation.Resource;
 import java.io.File;
